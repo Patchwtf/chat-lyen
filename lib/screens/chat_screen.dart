@@ -1,3 +1,4 @@
+import 'package:chat_lyen/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -7,11 +8,17 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat con XXXX"),
+        title: const Text("Chat con XXXX"),
       ),
-      body: Center(
-        child: Text('ChatScreen'),
-      ),
+      body: const Center(
+          child: Column(
+        children: [
+          MessageCard(
+              userName: 'Yo', message: "I'm Batman", dateTime: '07:58 p.m.'),
+          MessageCard(
+              userName: 'Yo', message: "I'm Batman", dateTime: '07:58 p.m.')
+        ],
+      )),
     );
   }
 }
