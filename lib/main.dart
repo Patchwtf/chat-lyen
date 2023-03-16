@@ -9,6 +9,7 @@ class ChatLyen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Material App',
       initialRoute: AppRoutes.initiateRoute,
       routes: AppRoutes.getAppRoutes(),
