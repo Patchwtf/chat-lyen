@@ -11,40 +11,27 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final messageController = TextEditingController();
   @override
-  Widget build(BuildContext context) {
-    final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
+  void dispose() {
+    // Limpia el controlador cuando el widget se elimine del árbol de widgets
+    messageController.dispose();
+    super.dispose();
+  }
 
-    final prueba = <Messages_Const>[
-      Messages_Const(
-          message: 'Buen Día Juan',
-          receptorUid: 'Juan',
-          remitentUid: 'Memo',
-          fecha: DateTime.now()),
-      Messages_Const(
-          message: 'Hola Memo Como Estas?',
-          receptorUid: 'Meno',
-          remitentUid: 'Juan',
-          fecha: DateTime.now()),
-      Messages_Const(
-          message: 'Para que soy bueno?',
-          receptorUid: 'Meno',
-          remitentUid: 'Juan',
-          fecha: DateTime.now()),
-      Messages_Const(
-          message:
-              'Aqui Nomas Jalando, Ya sabes como es esto. \n En fin solo te queria saludar',
-          receptorUid: 'Juan',
-          remitentUid: 'Memo',
-          fecha: DateTime.now()),
-    ];
-    final ColorScheme colors = Theme.of(context).colorScheme;
+  Widget build(BuildContext context) {
+    final ButtonStyle style = ElevatedButton.styleFrom(
+      backgroundColor: Colors.blueAccent,
+      shape: const CircleBorder(),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Chat con XXXX"),
+        automaticallyImplyLeading: false,
       ),
-      body: SizedBox(
-        // decoration: const BoxDecoration(color: Colors.blueGrey),
+      body: Container(
+        decoration: const BoxDecoration(color: Colors.blueGrey),
         width: double.infinity,
         child: Column(
           children: [
@@ -53,7 +40,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 padding: const EdgeInsets.all(5),
                 child: ListView(
                   children: [
-                    ...prueba.map((e) => MessageCard(
+                    ...Messages.messages_hist.map((e) => MessageCard(
                           userName: e.remitentUid,
                           message: e.message,
                           dateTime:
@@ -66,58 +53,51 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ),
             ),
-            Form(
-              key: myFormKey,
-              child: Container(
-                height: 50,
-                padding: const EdgeInsets.all(5.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        initialValue: '',
-                        onChanged: (value) {},
-                        decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                            ),
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 10),
-                            isDense: false),
+            Container(
+              height: 50,
+              margin: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.all(5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(
+                      controller: messageController,
+                      onChanged: (value) {},
+                      style: const TextStyle(color: Colors.white),
+                      decoration: const InputDecoration(
+                        filled: true,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            borderSide: BorderSide.none),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        fillColor: Color.fromRGBO(41, 88, 112, 1),
                       ),
+                      textAlignVertical: TextAlignVertical.bottom,
+                      maxLines: 2,
                     ),
-                    const SizedBox(
-                      width: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (messageController.text != "") {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        Messages.messages_hist.add(Messages_Const(
+                            fecha: DateTime.now(),
+                            message: messageController.text,
+                            receptorUid: 'Memo',
+                            remitentUid: 'Juan'));
+                        messageController.clear();
+                        setState(() {});
+                      }
+                    },
+                    style: style,
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(Icons.send),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      splashColor: Colors.blueGrey,
-                      splashRadius: 25,
-                      style: IconButton.styleFrom(
-                        foregroundColor: colors.onPrimary,
-                        backgroundColor: colors.primary,
-                        disabledBackgroundColor:
-                            colors.onSurface.withOpacity(0.12),
-                        hoverColor: colors.onPrimary.withOpacity(0.08),
-                        focusColor: colors.onPrimary.withOpacity(0.12),
-                        highlightColor: colors.onPrimary.withOpacity(0.12),
-                      ),
-                      icon: const Icon(Icons.send),
-                    )
-                    // IconButton(
-                    //   splashColor: Colors.blueGrey,
-                    //   splashRadius: 25,
-                    //   onPressed: () {
-                    //     FocusScope.of(context).requestFocus(FocusNode());
-                    //   },
-                    //   icon: const Icon(
-                    //     Icons.send,
-                    //     color: Colors.black,
-                    //   ),
-                    // )
-                  ],
-                ),
+                  )
+                ],
               ),
             )
           ],
