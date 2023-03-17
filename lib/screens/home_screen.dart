@@ -1,6 +1,8 @@
 import 'package:chat_lyen/routes/routes.dart';
 import 'package:flutter/material.dart';
 
+import '../models/models.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -15,6 +17,9 @@ class HomeScreen extends StatelessWidget {
           separatorBuilder: (BuildContext context, int index) {
             return TextButton(
                 onPressed: () {
+                  menuOptions[index].name == 'Chat'
+                      ? Messages.messages_hist.clear()
+                      : null;
                   Navigator.pushNamed(context, menuOptions[index].route);
                 },
                 child: Row(
