@@ -11,6 +11,9 @@ class HomeScreen extends StatelessWidget {
     final menuOptions = AppRoutes.menuOptions;
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Menu Principal"),
+      ),
       body: Center(
         child: ListView.separated(
           itemCount: menuOptions.length + 1,
