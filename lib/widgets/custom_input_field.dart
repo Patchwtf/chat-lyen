@@ -70,11 +70,17 @@ class DateFormField extends StatelessWidget {
       controller: dateTextController,
       keyboardType: TextInputType.datetime,
       validator: (value) {
+        int intValue;
+        try {
+          intValue = DateTime.now()
+              .compareTo(DateTime.parse(value!.replaceAll('/', '-')));
+        } catch (e) {
+          intValue = -1;
+        }
+
         if (value == null) {
           return 'Esta campo no puede estar vacio';
-        } else if (DateTime.now()
-                .compareTo(DateTime.parse(value.replaceAll('/', '-'))) >
-            0) {
+        } else if (intValue > 0) {
           return 'La fecha deberá ser posterior al dia de hoy';
         } else {
           return null;

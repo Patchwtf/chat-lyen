@@ -1,9 +1,14 @@
 import 'package:chat_lyen/widgets/custom_input_field.dart';
 import 'package:flutter/material.dart';
 
-class ProjectRegisterScreen extends StatelessWidget {
+class ProjectRegisterScreen extends StatefulWidget {
   const ProjectRegisterScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ProjectRegisterScreen> createState() => _ProjectRegisterScreenState();
+}
+
+class _ProjectRegisterScreenState extends State<ProjectRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
@@ -46,7 +51,6 @@ class ProjectRegisterScreen extends StatelessWidget {
                       FocusScope.of(context).requestFocus(FocusNode());
                       if (!myFormKey.currentState!.validate()) {
                         print('Formulario no valido');
-                        return;
                       } else {
                         formValues['customer-uid'] = "U8hjd878sdafAda989";
                         print(formValues);
