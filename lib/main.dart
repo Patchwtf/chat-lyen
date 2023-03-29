@@ -10,8 +10,8 @@ class ChatLyen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: lightTheme,
-      darkTheme: darkTheme,
+      // theme: lightTheme,
+      // darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       initialRoute: AppRoutes.initiateRoute,
