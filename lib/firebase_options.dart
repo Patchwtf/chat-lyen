@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '297948100739',
     projectId: 'chat-lyen',
     storageBucket: 'chat-lyen.appspot.com',
-    iosClientId: '297948100739-pvepa307ckmmdt79frttn994jah0qfui.apps.googleusercontent.com',
+    iosClientId:
+        '297948100739-pvepa307ckmmdt79frttn994jah0qfui.apps.googleusercontent.com',
     iosBundleId: 'com.lyenconsulting.chatLyen',
   );
 }
