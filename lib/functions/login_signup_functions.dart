@@ -15,7 +15,9 @@ class Login {
           email: email, password: password);
       credential.currentUser!.updateDisplayName(name);
       // await credential.currentUser!.updatePhoneNumber(phoneNumber);
-      credential.currentUser!.sendEmailVerification();
+      if (role == "proveeder") {
+        credential.currentUser!.sendEmailVerification();
+      }
       credential.signOut();
 
       // ignore: use_build_context_synchronously
