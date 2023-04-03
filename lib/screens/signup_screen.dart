@@ -38,11 +38,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Registro de nuevo usuario"),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
       body: Container(
-        padding: EdgeInsets.only(right: 20, left: 20, top: 25),
+        padding: const EdgeInsets.only(right: 20, left: 20, top: 25),
         child: ListView(
           children: [
+            const Image(image: AssetImage("assets/lyen-logo.png"), height: 100),
             Form(
               key: myFormKey,
               child: Column(children: [
@@ -54,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     validator: (value) => value!.length < 3
                         ? "EL valor debe de ser mas de 3 letras"
                         : null),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 CustomInputField(
                     formProperty: 'last-name',
                     formValues: formValues,
@@ -63,17 +66,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     validator: (value) => value!.length < 3
                         ? "EL valor debe de ser mas de 3 letras"
                         : null),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 CustomInputField(
                     formProperty: 'email',
                     formValues: formValues,
                     labelText: "Ingrese su correo",
                     icon: Icons.email,
                     keyBoardType: TextInputType.emailAddress,
-                    validator: (value) => isValidEmail(value!)!
+                    validator: (value) => isValidEmail(value!)
                         ? null
                         : "Ingrese un correo valido"),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 CustomInputField(
                   formProperty: 'password',
                   formValues: formValues,
@@ -85,7 +88,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ? null
                       : "Su contraseña deberá contenar al menos \n8 caracteres, 1 simbolo especial, 1 mayuscula y 1 numero",
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 CustomInputField(
                     formProperty: 'enterprise',
                     formValues: formValues,
@@ -94,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     validator: (value) => value!.length < 3
                         ? "EL valor debe de ser mas de 3 letras"
                         : null),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
               ]),
             ),
             DropdownButtonFormField(
@@ -116,7 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 }
               },
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
             ElevatedButton(
                 onPressed: () {
                   FocusScope.of(context).requestFocus(FocusNode());
@@ -133,7 +136,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       enterprise: formValues['enterprise']!,
                       role: formValues['role']!);
                 },
-                child: Text("Register"))
+                child: const Text("Register"))
           ],
         ),
       ),
