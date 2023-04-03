@@ -1,7 +1,5 @@
 import 'dart:ffi';
 
-import 'package:flutter/material.dart';
-
 class Contacs_mod {
   final String name;
   final String uid;

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Messages_Const {
   final String message;
   final String receptorUid;
