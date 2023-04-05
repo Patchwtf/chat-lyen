@@ -100,6 +100,9 @@ class Login {
                     tittle: "Usuario sin verificar",
                     description: "Se envió a su correo para la verificación"));
       }
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamedAndRemoveUntil(
+          context, 'home', ModalRoute.withName('/'));
     } on FirebaseAuthException catch (e) {
       String description = "", codigo = "";
 
@@ -122,6 +125,11 @@ class Login {
           description =
               "La contraseña que a ingresado no concuerda con la registrada o el usuario con el que intenta ingresar no existe";
           break;
+        default:
+          codigo = "Servicios no disponibles";
+          description =
+              "Servicios no disponibles actualmente, intente mas tarde";
+          break;
       }
 
       return Platform.isAndroid
@@ -134,6 +142,13 @@ class Login {
               builder: (context) => alertDialogAndroid(
                   tittle: "Error: $codigo", description: description));
     }
+  }
+
+  // ignore: non_constant_identifier_names
+  SignOut({required BuildContext context}) {
+    FirebaseAuth.instance.signOut();
+    Navigator.pushNamedAndRemoveUntil(
+        context, 'init', ModalRoute.withName('/'));
   }
 }
 
