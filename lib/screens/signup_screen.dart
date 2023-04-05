@@ -21,7 +21,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       'email': '',
       'password': '',
       'enterprise': '',
-      'role': '',
+      'role': role,
     };
 
     List<dynamic> opciones = [
@@ -127,6 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     return;
                   }
                   Login credentials = Login();
+
                   credentials.registerNewUser(
                       context: context,
                       email: formValues['email']!,
