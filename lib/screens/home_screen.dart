@@ -1,3 +1,4 @@
+import 'package:chat_lyen/functions/functions.dart';
 import 'package:chat_lyen/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,14 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Menu Principal"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Login credential = Login();
+                credential.SignOut(context: context);
+              },
+              icon: const Icon(Icons.logout))
+        ],
       ),
       body: Center(
         child: ListView.separated(
