@@ -1,12 +1,22 @@
-import 'package:chat_lyen/screens/init_screen.dart';
-import 'package:chat_lyen/screens/login_screen.dart';
-import 'package:chat_lyen/screens/signup_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../models/menu_option.dart';
-import '../screens/screens.dart';
+import 'package:chat_lyen/models/models.dart';
+import 'package:chat_lyen/screens/screens.dart';
 
 class AppRoutes {
-  static const initiateRoute = 'init';
+  String? initiateRoute() {
+    String initRoute = 'init';
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        initRoute = 'home';
+      }
+    });
+
+    return initRoute;
+  }
+
+  static String ruta =
+      FirebaseAuth.instance.currentUser != null ? 'home' : 'init';
 
   static final menuOptions = <MenuOptions>[
     MenuOptions(

@@ -22,7 +22,7 @@ class ChatLyen extends StatelessWidget {
       // darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      initialRoute: AppRoutes.initiateRoute,
+      initialRoute: AppRoutes.ruta,
       routes: AppRoutes.getAppRoutes(),
     );
   }
