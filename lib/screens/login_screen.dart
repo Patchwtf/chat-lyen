@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                   labelText: 'Ingrese su contraseña',
                   icon: Icons.password,
                   validator: (value) =>
-                      value!.length < 8 ? null : "Contraseña invalida"),
+                      value!.length < 8 ? "Contraseña Invalida" : null),
               const SizedBox(height: 30),
               Row(
                 children: [
