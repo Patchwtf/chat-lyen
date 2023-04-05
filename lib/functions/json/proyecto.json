@@ -1,3 +1,41 @@
 {
-    "proyecto": []
+    "proyecto": [
+        {
+            "nombre": "",
+            "fecha-inicio": "",
+            "status": "",
+            "descripcion": "",
+            "customerUID": "",
+            "employeesUId": [
+                {
+                    "uid": true
+                }
+            ]
+        }
+    ],
+    "usuario": [
+        {
+            "nombre": "",
+            "apellido": "",
+            "role": "",
+            "Empresa": "",
+            "conversationID": [
+                {
+                    "id": true
+                }
+            ]
+        }
+    ],
+    "chat-hist": [
+        {
+            "conversationID": [
+                {
+                    "remitendUID": "",
+                    "senderUID": "",
+                    "message": "",
+                    "timeStap": ""
+                }
+            ]
+        }
+    ]
 }
