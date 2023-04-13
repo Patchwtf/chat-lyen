@@ -18,6 +18,26 @@ class Login {
     try {
       await credential.createUserWithEmailAndPassword(
           email: email, password: password);
+      //update data
+      credential.currentUser!.updateDisplayName(name);
+      // await credential.currentUser!.updatePhoneNumber(phoneNumber);
+
+      credential.currentUser!.sendEmailVerification();
+
+      final newPostKey = credential.currentUser!.uid.toString();
+
+      DatabaseReference ref =
+          FirebaseDatabase.instance.ref("usuario/$newPostKey");
+      await ref.set({
+        "nombre": name,
+        "empresa": enterprise,
+        "role": role,
+        "email": email
+      });
+      credential.signOut();
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamedAndRemoveUntil(
+          context, 'login', ModalRoute.withName('/'));
     } on FirebaseAuthException catch (e) {
       String description = "", codigo = "";
 
@@ -50,27 +70,6 @@ class Login {
               context: context,
               builder: (context) => alertDialogAndroid(
                   tittle: "Error: $codigo", description: description));
-    } finally {
-      //update data
-      credential.currentUser!.updateDisplayName(name);
-      // await credential.currentUser!.updatePhoneNumber(phoneNumber);
-
-      credential.currentUser!.sendEmailVerification();
-
-      final newPostKey = credential.currentUser!.uid.toString();
-
-      DatabaseReference ref =
-          FirebaseDatabase.instance.ref("usuario/$newPostKey");
-      await ref.set({
-        "nombre": name,
-        "empresa": enterprise,
-        "role": role,
-        "email": email
-      });
-      credential.signOut();
-      // ignore: use_build_context_synchronously
-      Navigator.pushNamedAndRemoveUntil(
-          context, 'login', ModalRoute.withName('/'));
     }
   }
 
