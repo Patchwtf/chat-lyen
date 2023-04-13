@@ -1,7 +1,10 @@
+import 'package:chat_lyen/screens/projects_view_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_lyen/models/models.dart';
 import 'package:chat_lyen/screens/screens.dart';
+
+import '../functions/functions.dart';
 
 class AppRoutes {
   String? initiateRoute() {
@@ -29,6 +32,16 @@ class AppRoutes {
         route: 'project-register',
         icon: Icons.assignment_add,
         screen: const ProjectRegisterScreen()),
+    MenuOptions(
+        name: 'Lista de Proyectos',
+        route: 'project-list',
+        icon: Icons.format_list_bulleted,
+        screen: const ProjectViewScreen()),
+    MenuOptions(
+        name: 'Administración de proyectos',
+        route: 'project-admin',
+        icon: Icons.settings,
+        screen: const ProjectAdminScreen()),
   ];
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {
     Map<String, Widget Function(BuildContext)> appRoutes = {};
