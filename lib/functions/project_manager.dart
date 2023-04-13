@@ -1,7 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:ffi';
 import 'dart:io';
 
+import 'package:chat_lyen/functions/functions.dart';
+import 'package:chat_lyen/models/models.dart';
 import 'package:chat_lyen/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -25,7 +28,7 @@ class ProjectManager {
         "description": description,
         "fecha-inicio": startDate,
         "customerUID": customerUID,
-        "status": "open"
+        "status": "Abierto"
       });
       ref = FirebaseDatabase.instance.ref("proyecto/$newPostKey/employeesUID");
       await ref.set({customerUID: true});
@@ -46,11 +49,125 @@ class ProjectManager {
     }
   }
 
-  getProjectsList() {}
+// ! TODO: Borrar si no se ocupa
+  Map<String, Map> projectsProperties = {};
+
+  final List<ProjectsProperties> projectPropertiesList = <ProjectsProperties>[];
+
+//¡ Prueba de FUture
+  Future<List<ProjectsProperties>> prueba() async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("proyecto");
+    DatabaseEvent event = await ref.once();
+    List<ProjectsProperties> projectListTest = [];
+    for (var value in event.snapshot.children) {
+      String projectID = value.key.toString();
+      String description = value.child("description").value.toString();
+      String customerUID = value.child("customerUID").value.toString();
+      String fechaInicio = value.child("fecha-inicio").value.toString();
+      String nombre = value.child("nombre").value.toString();
+      String status = value.child("status").value.toString();
+      List employeesUID = [];
+
+      for (var employee in value.child("employeesUID").children) {
+        if (employee.value == true) {
+          employeesUID.add(employee.key);
+        }
+      }
+      projectListTest.add(
+        ProjectsProperties(
+            projectID: projectID,
+            status: status,
+            projectName: nombre,
+            projectDescription: description,
+            projectStartDate: fechaInicio,
+            customerUID: customerUID,
+            employeesUID: employeesUID),
+      );
+    }
+
+    return projectListTest;
+  }
+
+  Future getProjectsList() async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("proyecto");
+// DatabaseReference child = ref.child("-NSFSmU4y1CJNZrIseU7");
+    // print(child.key);
+    DatabaseEvent event = await ref.once();
+    projectPropertiesList.clear();
+    for (var value in event.snapshot.children) {
+      String projectID = value.key.toString();
+      String description = value.child("description").value.toString();
+      String customerUID = value.child("customerUID").value.toString();
+      String fechaInicio = value.child("fecha-inicio").value.toString();
+      String nombre = value.child("nombre").value.toString();
+      String status = value.child("status").value.toString();
+
+      List employeesUID = [];
+
+      for (var employee in value.child("employeesUID").children) {
+        if (employee.value == true) {
+          employeesUID.add(employee.key);
+        }
+      }
+
+      projectsProperties.addAll({
+        projectID: {
+          "projectName": nombre,
+          "projectDescription": description,
+          "projectStartDate": fechaInicio,
+          "customerUID": customerUID,
+          "employeesUID": employeesUID,
+          "status": status
+        }
+      });
+      projectPropertiesList.add(
+        ProjectsProperties(
+            projectID: projectID,
+            status: status,
+            projectName: nombre,
+            projectDescription: description,
+            projectStartDate: fechaInicio,
+            customerUID: customerUID,
+            employeesUID: employeesUID),
+      );
+    }
+  }
+
+  addPersonToProject(String projectID) async {
+    String personUID = ProfileProperties().getProfileUID();
+    DatabaseReference ref =
+        FirebaseDatabase.instance.ref("proyecto/$projectID/employeesUID");
+    DatabaseEvent evento = await ref.once();
+
+    Map<String?, bool?> datos = {};
+
+    for (var elemento in evento.snapshot.children) {
+      // ignore: sdk_version_since
+
+      datos.addAll({elemento.key: bool.tryParse(elemento.value.toString())});
+    }
+    if (datos.containsKey(personUID)) {
+      ref.update({personUID: true});
+    } else {
+      datos.addAll({personUID: true});
+      await ref.set(datos);
+    }
+  }
+
+  deletePersonToProject(String projectID) {
+    String personUID = ProfileProperties().getProfileUID();
+    DatabaseReference ref =
+        FirebaseDatabase.instance.ref("proyecto/$projectID/employeesUID");
+    ref.update({personUID: false});
+  }
+
+  deleteProject(String projectUID) {
+    DatabaseReference ref =
+        FirebaseDatabase.instance.ref("proyecto/$projectUID");
+    ref.update({"Status": "Cerrado"});
+  }
 
   adminProject() {}
-  addPersonToProject() {}
-  deletePersonToProject() {}
 }
 
 class AdminProject extends ProjectManager {}
