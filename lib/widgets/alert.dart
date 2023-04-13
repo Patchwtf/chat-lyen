@@ -60,3 +60,79 @@ class alertDialogCupertino extends StatelessWidget {
     );
   }
 }
+
+//$ Alertas de aceptar o negar
+
+class alertDialogAndroidYN extends StatelessWidget {
+  alertDialogAndroidYN(
+      {super.key,
+      required this.tittle,
+      required this.description,
+      required this.funcion});
+
+  String tittle, description;
+  void Function()? funcion;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      elevation: 5,
+      title: Text(tittle),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(description),
+          const SizedBox(height: 10),
+        ],
+      ),
+      actions: [
+        TextButton(
+            onPressed: () => Navigator.pop(context),
+            style: TextButton.styleFrom(foregroundColor: Colors.blue),
+            child: const Text('No')),
+        TextButton(
+          onPressed: funcion,
+          style: TextButton.styleFrom(foregroundColor: Colors.blue),
+          child: const Text('Ok'),
+        ),
+      ],
+    );
+  }
+}
+
+class alertDialogCupertinoYN extends StatelessWidget {
+  alertDialogCupertinoYN(
+      {super.key,
+      required this.tittle,
+      required this.description,
+      required this.funcion});
+
+  String tittle, description;
+  void Function()? funcion;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoAlertDialog(
+      title: Text(tittle),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(description),
+          const SizedBox(height: 10),
+        ],
+      ),
+      actions: [
+        TextButton(
+            onPressed: () => Navigator.pop(context),
+            style: TextButton.styleFrom(foregroundColor: Colors.blue),
+            child: const Text('No')),
+        TextButton(
+          onPressed: funcion,
+          style: TextButton.styleFrom(foregroundColor: Colors.blue),
+          child: const Text('Ok'),
+        )
+      ],
+    );
+  }
+}
