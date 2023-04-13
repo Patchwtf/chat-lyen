@@ -29,7 +29,7 @@ class _ProjectRegisterScreenState extends State<ProjectRegisterScreen> {
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(12),
-          child: Column(
+          child: ListView(
             children: [
               const SizedBox(height: 20),
               const Image(
