@@ -32,7 +32,10 @@ class Login {
         "nombre": name,
         "empresa": enterprise,
         "role": role,
-        "email": email
+        "email": email,
+        "conversationID": {
+          0: {"id": true}
+        }
       });
       credential.signOut();
       // ignore: use_build_context_synchronously
@@ -120,7 +123,7 @@ class Login {
           description = "El usuario con el que trata de ingresar no existe";
           break;
         case "wrong-password":
-          codigo = "Contraseña erroena";
+          codigo = "Contraseña erronea";
           description =
               "La contraseña que a ingresado no concuerda con la registrada o el usuario con el que intenta ingresar no existe";
           break;
