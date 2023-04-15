@@ -22,11 +22,11 @@ class AppRoutes {
       FirebaseAuth.instance.currentUser != null ? 'home' : 'init';
 
   static final menuOptions = <MenuOptions>[
-    MenuOptions(
-        name: 'Chat',
-        route: 'chat',
-        icon: Icons.perm_phone_msg_rounded,
-        screen: const ChatScreen()),
+    // MenuOptions(
+    //     name: 'Chat',
+    //     route: 'chat',
+    //     icon: Icons.perm_phone_msg_rounded,
+    //     screen: const ChatScreen()),
     MenuOptions(
         name: 'Registro de Proyecto',
         route: 'project-register',
