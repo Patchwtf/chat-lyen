@@ -1,17 +1,19 @@
+import 'package:chat_lyen/functions/contacts.dart';
 import 'package:chat_lyen/models/models.dart';
 import 'package:chat_lyen/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
-
+  const ChatScreen({Key? key, required this.conversationID}) : super(key: key);
+  final String conversationID;
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
   final messageController = TextEditingController();
+
   @override
   void dispose() {
     // Limpia el controlador cuando el widget se elimine del árbol de widgets
@@ -24,6 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
       backgroundColor: Colors.blueAccent,
       shape: const CircleBorder(),
     );
+    // widget.conversationID;
 
     return Scaffold(
       appBar: AppBar(
@@ -88,6 +91,8 @@ class _ChatScreenState extends State<ChatScreen> {
                             receptorUid: 'Memo',
                             remitentUid: 'Juan'));
                         messageController.clear();
+                        ContactosAndMessages cam = ContactosAndMessages();
+                        print(cam.getChats("conversationID"));
                         setState(() {});
                       }
                     },
