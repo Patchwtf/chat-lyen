@@ -1,3 +1,5 @@
+export 'package:chat_lyen/widgets/contactos_card.dart';
+
 export 'package:chat_lyen/widgets/project_card.dart';
 
 export 'package:chat_lyen/widgets/alert.dart';
