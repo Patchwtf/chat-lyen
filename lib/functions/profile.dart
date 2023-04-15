@@ -8,11 +8,11 @@ class ProfileProperties {
     return FirebaseAuth.instance.currentUser!.uid.toString();
   }
 
-  Future getProfileRole() async {
+  Future<String> getProfileRole() async {
     String userUID = ProfileProperties().getProfileUID();
     DatabaseReference ref = FirebaseDatabase.instance.ref("usuario/$userUID");
     DatabaseEvent event = await ref.once();
-    Role = event.snapshot.child("role").value.toString();
-    return event.snapshot.child("role").value.toString();
+    Role = await event.snapshot.child("role").value.toString();
+    return await event.snapshot.child("role").value.toString();
   }
 }
