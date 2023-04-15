@@ -15,7 +15,7 @@ class _ProjectAdminScreenState extends State<ProjectAdminScreen> {
   ProjectManager pm = ProjectManager();
   List<ProjectsProperties> projectList = [];
   obtenerLista() async {
-    projectList = await pm.prueba();
+    projectList = await pm.getProjectsListTwo();
     if (super.mounted) {
       setState(() {});
     }

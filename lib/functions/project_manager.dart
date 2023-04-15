@@ -55,7 +55,7 @@ class ProjectManager {
   final List<ProjectsProperties> projectPropertiesList = <ProjectsProperties>[];
 
 //¡ Prueba de FUture
-  Future<List<ProjectsProperties>> prueba() async {
+  Future<List<ProjectsProperties>> getProjectsListTwo() async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("proyecto");
     DatabaseEvent event = await ref.once();
     List<ProjectsProperties> projectListTest = [];
@@ -164,7 +164,7 @@ class ProjectManager {
   deleteProject(String projectUID) {
     DatabaseReference ref =
         FirebaseDatabase.instance.ref("proyecto/$projectUID");
-    ref.update({"Status": "Cerrado"});
+    ref.update({"status": "Cerrado"});
   }
 
   adminProject() {}

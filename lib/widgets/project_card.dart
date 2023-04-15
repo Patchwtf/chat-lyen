@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:chat_lyen/functions/functions.dart';
+import 'package:chat_lyen/screens/screens.dart';
 import 'package:chat_lyen/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -16,15 +17,16 @@ class ProjectListCard extends StatelessWidget {
       required this.employeesUID,
       required this.projectStatus});
 
+  ProfileProperties pp = ProfileProperties();
   String projectName;
   String projectDescription;
   String projectStartDate;
   String projectUID;
   String projectStatus;
   List employeesUID;
-  ProfileProperties pp = ProfileProperties();
   String rol = "";
   String buttonText = "";
+
   obtenerRol() async {
     rol = await pp.getProfileRole();
   }
@@ -33,6 +35,7 @@ class ProjectListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Color color = projectStatus == "Abierto" ? Colors.red : Colors.grey;
     obtenerRol();
+
     return Row(
       children: [
         Expanded(
@@ -129,7 +132,18 @@ class ProjectListCard extends StatelessWidget {
                       Expanded(
                           child: ElevatedButton(
                               onPressed: () {
-                                print(employeesUID.length);
+                                print(ProfileProperties()
+                                    .getProfileUID()
+                                    .toString());
+                                final List<String> employeesUIDs = employeesUID
+                                    .map((e) => e.toString())
+                                    .toList();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ContactosScreen(
+                                              contactos: employeesUIDs,
+                                            )));
                               },
                               child:
                                   const Text("Visualizar Lista de Contactos")))
@@ -228,7 +242,13 @@ class ProjectActionCard extends StatelessWidget {
                                               tittle: "Añadirse al proyecto",
                                               description:
                                                   "¿Desea agregar este proyecto a su lista?\n La lista de contactos del proyecto estará disponible para usted",
-                                              funcion: () {});
+                                              funcion: () {
+                                                ProjectManager pm =
+                                                    ProjectManager();
+                                                pm.addPersonToProject(
+                                                    projectUID);
+                                                Navigator.pop(context);
+                                              });
                                     });
                               },
                               child: const Text("Añadirse al proyecto"))),
