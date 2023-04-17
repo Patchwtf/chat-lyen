@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lyenconsulting.chat_lyen">
     <application
-        android:label="chat_lyen"
+        android:label="Chat Lyen"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/a1453501">
         <activity
             android:name=".MainActivity"
             android:exported="true"
