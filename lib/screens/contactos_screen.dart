@@ -1,5 +1,4 @@
 import 'package:chat_lyen/models/models.dart';
-import 'package:chat_lyen/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../functions/functions.dart';

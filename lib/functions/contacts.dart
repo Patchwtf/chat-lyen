@@ -50,19 +50,34 @@ class ContactosAndMessages {
     return conversationUID;
   }
 
+//! TODO: Eliminar metodo
   List<Messages_Const> getChats(String conversationID) {
     DatabaseReference starCountRef =
         FirebaseDatabase.instance.ref('chat-hist/$conversationID');
     List<Messages_Const> tempList = [];
+
     starCountRef.onValue.listen((DatabaseEvent event) {
       final data = event.snapshot;
-      tempList.add(Messages_Const(
-          message: data.child("0").child("message").value.toString(),
-          receptorUid: "receptorUid",
-          remitentUid: "remitentUid",
-          fecha: DateTime.now()));
+      for (var valor in data.children) {
+        tempList.add(Messages_Const(
+            message: valor.child("message").value.toString(),
+            receptorUid: "receptorUid",
+            remitentUid: "remitentUid",
+            fecha: DateTime.now()));
+      }
     });
-    print(tempList.length);
     return tempList;
+  }
+
+  void sendMessage(String conversationID, String message, String remitentUID,
+      String senderUID, String timeStamp) {
+    DatabaseReference conversation =
+        FirebaseDatabase.instance.ref('chat-hist/$conversationID');
+    conversation.push().set({
+      "message": message,
+      "remitendUID": remitentUID,
+      "senderUID": senderUID,
+      "timeStamp": timeStamp,
+    });
   }
 }
