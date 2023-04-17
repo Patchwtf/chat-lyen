@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:chat_lyen/models/models.dart';
 import 'package:chat_lyen/screens/screens.dart';
 
-import '../functions/functions.dart';
-
 class AppRoutes {
   String? initiateRoute() {
     String initRoute = 'init';

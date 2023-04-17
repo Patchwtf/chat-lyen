@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
             return TextButton(
                 onPressed: () {
                   menuOptions[index].name == 'Chat'
-                      ? Messages.messages_hist.clear()
+                      ? Messages.messagesHist.clear()
                       : null;
                   Navigator.pushNamed(context, menuOptions[index].route);
                 },
