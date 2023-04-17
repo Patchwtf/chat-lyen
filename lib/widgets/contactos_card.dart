@@ -55,10 +55,15 @@ class ContacCard extends StatelessWidget {
                   idConversation = await cam.inChat(uid);
                   // ignore: use_build_context_synchronously
                   await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ChatScreen(conversationID: idConversation)));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatScreen(
+                        conversationID: idConversation,
+                        remitentUid: uid,
+                        remitentName: nombre,
+                      ),
+                    ),
+                  );
                 },
                 child: const Text("Entrar a la conversación")),
             const SizedBox(height: 10),
