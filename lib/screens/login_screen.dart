@@ -31,6 +31,7 @@ class LoginScreen extends StatelessWidget {
                   formProperty: 'email',
                   formValues: formValues,
                   labelText: 'Ingrese su correo',
+                  keyBoardType: TextInputType.emailAddress,
                   icon: Icons.email,
                   validator: (value) =>
                       isValidEmail(value!) ? null : "Ingrese un correo valido"),
