@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:intl/intl.dart';
 
 class CustomInputField extends StatelessWidget {
-  CustomInputField(
+  const CustomInputField(
       {super.key,
       this.hintText,
       this.labelText,
@@ -36,7 +36,6 @@ class CustomInputField extends StatelessWidget {
         Expanded(
           child: TextFormField(
             initialValue: '',
-            textCapitalization: TextCapitalization.words,
             keyboardType: keyBoardType,
             obscureText: isPassword,
             onChanged: (value) => formValues[formProperty] = value,
