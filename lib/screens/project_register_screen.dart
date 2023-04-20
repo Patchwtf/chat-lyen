@@ -44,16 +44,18 @@ class _ProjectRegisterScreenState extends State<ProjectRegisterScreen> {
                         formValues: formValues,
                         labelText: 'Nombre del proyecto',
                         icon: Icons.manage_search,
-                        validator: (value) => value!.length < 3
-                            ? "EL valor debe de ser mas de 3 letras"
+                        validator: (value) => value!.length < 3 ||
+                                RegExp(r'^[a-zA-Z]').hasMatch(value)
+                            ? "Tiene que contener solo letras y ser mayor a 3 caracteres."
                             : null),
                     CustomInputField(
                         formProperty: 'project-description',
                         formValues: formValues,
                         labelText: 'Descripción del proyecto',
                         icon: Icons.description,
-                        validator: (value) => value!.length < 3
-                            ? "EL valor debe de ser mas de 3 letras"
+                        validator: (value) => value!.length < 3 ||
+                                RegExp(r'^[a-zA-Z]').hasMatch(value)
+                            ? "Tiene que contener solo letras y ser mayor a 3 caracteres."
                             : null),
                     const SizedBox(height: 15),
                     Row(
