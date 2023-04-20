@@ -26,6 +26,9 @@ class _ProjectAdminScreenState extends State<ProjectAdminScreen> {
     obtenerLista();
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Proyectso Disponibles"),
+      ),
       body: Container(
         padding: const EdgeInsets.all(20),
         child: ListView.builder(
