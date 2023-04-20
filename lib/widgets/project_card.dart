@@ -47,9 +47,11 @@ class ProjectListCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                      Text(
-                        projectName,
-                        style: const TextStyle(fontSize: 20),
+                      Expanded(
+                        child: Text(
+                          projectName,
+                          style: const TextStyle(fontSize: 20),
+                        ),
                       )
                     ]),
                     const SizedBox(height: 8),
