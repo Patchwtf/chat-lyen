@@ -31,12 +31,12 @@ class AppRoutes {
         icon: Icons.assignment_add,
         screen: const ProjectRegisterScreen()),
     MenuOptions(
-        name: 'Lista de Proyectos',
+        name: 'Administración de proyectos',
         route: 'project-list',
         icon: Icons.format_list_bulleted,
         screen: const ProjectViewScreen()),
     MenuOptions(
-        name: 'Administración de proyectos',
+        name: 'Lista de Proyectos',
         route: 'project-admin',
         icon: Icons.settings,
         screen: const ProjectAdminScreen()),
