@@ -46,9 +46,13 @@ class MessageCard extends StatelessWidget {
                 SizedBox(
                   width:
                       message.length > 60 ? (messageSize.width / 2) - 20 : null,
-                  child: Text(
-                    message,
-                    style: messageTextStyle,
+                  child: Column(
+                    children: [
+                      Text(
+                        message,
+                        style: messageTextStyle,
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(
