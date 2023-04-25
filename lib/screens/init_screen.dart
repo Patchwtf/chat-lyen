@@ -13,11 +13,18 @@ class InitScreen extends StatelessWidget {
       "\n\nImplementamos sus distintas soluciones",
       style: TextStyle(fontSize: 15),
     );
+    String themeID = "Color(0xffffffff)";
+    String currentScaffoldColor =
+        Theme.of(context).scaffoldBackgroundColor.toString();
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Image(image: AssetImage("assets/lyen-logo.png"), height: 100),
+          currentScaffoldColor == themeID
+              ? const Image(
+                  image: AssetImage("assets/lyen-logo.png"), height: 100)
+              : const Image(
+                  image: AssetImage("assets/lyen-logo-dark.png"), height: 100),
           const SizedBox(height: 50),
           firstLine,
           scndLine,
