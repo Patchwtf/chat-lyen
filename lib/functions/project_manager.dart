@@ -1,6 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:chat_lyen/functions/functions.dart';
@@ -144,6 +142,7 @@ class ProjectManager {
     for (var elemento in evento.snapshot.children) {
       // ignore: sdk_version_since
 
+      // ignore: sdk_version_since
       datos.addAll({elemento.key: bool.tryParse(elemento.value.toString())});
     }
     if (datos.containsKey(personUID)) {
