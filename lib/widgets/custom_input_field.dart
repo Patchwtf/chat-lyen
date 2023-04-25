@@ -31,10 +31,17 @@ class CustomInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String themeID = "Color(0xffffffff)";
+    String currentScaffoldColor =
+        Theme.of(context).scaffoldBackgroundColor.toString();
     return Row(
       children: [
         Expanded(
           child: TextFormField(
+            style: TextStyle(
+                color: currentScaffoldColor == themeID
+                    ? Colors.black
+                    : Colors.white),
             initialValue: '',
             keyboardType: keyBoardType,
             obscureText: isPassword,

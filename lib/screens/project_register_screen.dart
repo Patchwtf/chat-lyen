@@ -21,7 +21,9 @@ class _ProjectRegisterScreenState extends State<ProjectRegisterScreen> {
       'project-description': '',
       'start-date': fecha,
     };
-
+    String themeID = "Color(0xffffffff)";
+    String currentScaffoldColor =
+        Theme.of(context).scaffoldBackgroundColor.toString();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Registro de Proyectos"),
@@ -32,8 +34,12 @@ class _ProjectRegisterScreenState extends State<ProjectRegisterScreen> {
           child: ListView(
             children: [
               const SizedBox(height: 20),
-              const Image(
-                  image: AssetImage("assets/lyen-logo.png"), height: 100),
+              currentScaffoldColor == themeID
+                  ? const Image(
+                      image: AssetImage("assets/lyen-logo.png"), height: 100)
+                  : const Image(
+                      image: AssetImage("assets/lyen-logo-dark.png"),
+                      height: 100),
               const SizedBox(height: 30),
               Form(
                 key: _myFormKey,
@@ -45,7 +51,7 @@ class _ProjectRegisterScreenState extends State<ProjectRegisterScreen> {
                         labelText: 'Nombre del proyecto',
                         icon: Icons.manage_search,
                         validator: (value) => value!.length < 3 ||
-                                RegExp(r'^[a-zA-Z]').hasMatch(value)
+                                !RegExp(r'^[a-zA-Z]').hasMatch(value)
                             ? "Tiene que contener solo letras y ser mayor a 3 caracteres."
                             : null),
                     CustomInputField(
@@ -54,15 +60,15 @@ class _ProjectRegisterScreenState extends State<ProjectRegisterScreen> {
                         labelText: 'Descripción del proyecto',
                         icon: Icons.description,
                         validator: (value) => value!.length < 3 ||
-                                RegExp(r'^[a-zA-Z]').hasMatch(value)
+                                !RegExp(r'^[a-zA-Z]').hasMatch(value)
                             ? "Tiene que contener solo letras y ser mayor a 3 caracteres."
                             : null),
                     const SizedBox(height: 15),
                     Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.date_range,
-                          color: Colors.grey,
+                          color: Theme.of(context).iconTheme.color,
                         ),
                         const SizedBox(width: 15),
                         Expanded(

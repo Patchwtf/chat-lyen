@@ -15,7 +15,9 @@ class LoginScreen extends StatelessWidget {
     }
 
     final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
-
+    String themeID = "Color(0xffffffff)";
+    String currentScaffoldColor =
+        Theme.of(context).scaffoldBackgroundColor.toString();
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -24,8 +26,12 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Image(
-                  image: AssetImage("assets/lyen-logo.png"), height: 100),
+              currentScaffoldColor == themeID
+                  ? const Image(
+                      image: AssetImage("assets/lyen-logo.png"), height: 100)
+                  : const Image(
+                      image: AssetImage("assets/lyen-logo-dark.png"),
+                      height: 100),
               const SizedBox(height: 40),
               CustomInputField(
                   formProperty: 'email',
