@@ -35,6 +35,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           .hasMatch(Value);
     }
 
+    String themeID = "Color(0xffffffff)";
+    String currentScaffoldColor =
+        Theme.of(context).scaffoldBackgroundColor.toString();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Registro de nuevo usuario"),
@@ -45,7 +48,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
         padding: const EdgeInsets.only(right: 20, left: 20, top: 25),
         child: ListView(
           children: [
-            const Image(image: AssetImage("assets/lyen-logo.png"), height: 100),
+            currentScaffoldColor == themeID
+                ? const Image(
+                    image: AssetImage("assets/lyen-logo.png"), height: 100)
+                : const Image(
+                    image: AssetImage("assets/lyen-logo-dark.png"),
+                    height: 100),
             Form(
               key: myFormKey,
               child: Column(children: [
@@ -109,11 +117,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       value: e['name'],
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [Text(e['name']), e['icon']])))
+                          children: [
+                            Text(e['name'],
+                                style: TextStyle(
+                                    color: currentScaffoldColor == themeID
+                                        ? Colors.black
+                                        : Colors.white)),
+                            e['icon']
+                          ])))
                   .toList(),
               onChanged: (value) {
                 if (value is String) {
-                  print(value);
                   formValues['role'] = value;
                   role = value;
                 }
